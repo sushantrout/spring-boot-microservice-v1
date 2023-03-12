@@ -9,18 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tech.dto.InventoryResponse;
 import com.tech.repository.InventoryRepository;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-@Service
 @Slf4j
+@Service
 public class InventoryService {
 
 	@Autowired
 	private InventoryRepository inventoryRepository;
 
     @Transactional(readOnly = true)
-    @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> skuCode) {
         log.info("Checking Inventory");
         return inventoryRepository.findBySkuCodeIn(skuCode).stream()
